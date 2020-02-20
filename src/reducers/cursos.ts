@@ -29,6 +29,7 @@ export interface Paralelo {
   id: number;
   profesor: string;
   cupos: number;
+  semestre: number;
 }
 
 export interface Curso {

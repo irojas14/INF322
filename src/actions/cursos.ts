@@ -23,10 +23,64 @@ export type CursosAction = ActionGetCursos;
 type ThunkResult = ThunkAction<void, RootState, undefined, CursosAction>;
 
 const CURSOS_LIST = [
-  { "id": 1, "sigla": 'IWI131', "asignatura": 'Programación', "departamento": 'Informática' , "paralelos": [{ "id": 1, "profesor": 'profe1', "cupos": 20},  { "id": 2, "profesor": 'profe2', "cupos": 30}]},
-  { "id": 3, "sigla": 'FIS100', "asignatura": 'Introducción a la Física', "departamento": 'Física' , "paralelos": [{"id": 1, "profesor": 'Hakobyan', "cupos": 50}] },
-  { "id": 4, "sigla": 'MAT021' , "asignatura": 'Matemáticas I', "departamento": 'Matemáticas', "paralelos": [{"id": 1, "profesor": 'El maravilloso Yansen', "cupos": 25}] },
-  { "id": 5, "sigla": 'MAT022' , "asignatura": 'Matemáticas II' , "departamento": 'Matemáticas' , "paralelos": [{"id": 1, "profesor": 'tuma', "cupos": 14}] } 
+  {
+      "id": 1,
+      "sigla": 'IWI131',
+      "asignatura": 'Programación',
+      "departamento": 'Informática' ,
+      "paralelos": [
+        { "id": 1, "profesor": 'profe1', "cupos": 20, "semestre": 1},
+        { "id": 2, "profesor": 'profe2', "cupos": 30, "semestre": 1},
+        { "id": 3, "profesor": 'profe1', "cupos": 20, "semestre": 1},
+        { "id": 4, "profesor": 'profe1', "cupos": 40, "semestre": 2},
+        { "id": 5, "profesor": 'profe3', "cupos": 20, "semestre": 3},
+        { "id": 6, "profesor": 'profe1', "cupos": 20, "semestre": 3}
+      ]
+  }, {
+      "id": 2,
+      "sigla": 'IWI133',
+      "asignatura": 'Base de datos',
+      "departamento": 'Informática' ,
+      "paralelos": [
+        { "id": 1, "profesor": 'profe3', "cupos": 20, "semestre": 1},
+        { "id": 2, "profesor": 'profe2', "cupos": 20, "semestre": 1},
+        { "id": 3, "profesor": 'profe3', "cupos": 40, "semestre": 2},
+        { "id": 4, "profesor": 'profe2', "cupos": 40, "semestre": 3}
+      ]
+  }, {
+      "id": 3,
+      "sigla": 'FIS100',
+      "asignatura": 'Introducción a la Física',
+      "departamento": 'Física' ,
+      "paralelos": [
+        {"id": 1, "profesor": 'Hakobyan', "cupos": 50, "semestre": 1},
+        {"id": 2, "profesor": 'profe3', "cupos": 20, "semestre": 2},
+        {"id": 3, "profesor": 'Yansen', "cupos": 30, "semestre": 2},
+        {"id": 4, "profesor": 'Hakobyan', "cupos": 50, "semestre": 3}
+      ]
+  }, {
+      "id": 4,
+      "sigla": 'MAT021',
+      "asignatura": 'Matemáticas I',
+      "departamento": 'Matemáticas',
+      "paralelos": [
+        {"id": 1, "profesor": 'Yansen', "cupos": 35, "semestre": 1},
+        {"id": 2, "profesor": 'Tuma', "cupos": 5, "semestre": 1},
+        {"id": 1, "profesor": 'Yansen', "cupos": 50, "semestre": 2},
+        {"id": 2, "profesor": 'Yansen', "cupos": 20, "semestre": 3},
+        {"id": 1, "profesor": 'profe3', "cupos": 20, "semestre": 3}
+      ]
+  }, {
+      "id": 5,
+      "sigla": 'MAT022',
+      "asignatura": 'Matemáticas II',
+      "departamento": 'Matemáticas',
+      "paralelos": [
+        {"id": 1, "profesor": 'Tuma', "cupos": 14, "semestre": 1},
+        {"id": 2, "profesor": 'Tuma', "cupos": 7, "semestre": 2},
+        {"id": 3, "profesor": 'Tuma', "cupos": 4, "semestre": 3}
+      ]
+  } 
 ];
 
 export const getAllCursos: ActionCreator<ThunkResult> = () => (dispatch) => {
