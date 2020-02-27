@@ -19,9 +19,15 @@ export class HorarioClases extends connect(store)(LitElement) {
   @property({type: Object})
   public cursos: ListaCursos = {};
 
- /* Variable para guardar el depto selecionado */
+ /* Variable para guardar el depto seleccionado */
   @property({type: String})
   private _selectedDepto: string = "";
+
+
+/* Variable para guardar el semestre seleccionado*/
+  @property({type: String})
+  private _selectedSemestre: string = "";
+
 
   static get styles() {
     return [

@@ -28,6 +28,7 @@ const CURSOS_LIST = [
       "sigla": 'IWI131',
       "asignatura": 'Programación',
       "departamento": 'Informática' ,
+      "semestre": '1er Semestre' ,
       "paralelos": [
         { "id": 1, "profesor": 'profe1', "cupos": 20, "semestre": 1},
         { "id": 2, "profesor": 'profe2', "cupos": 30, "semestre": 1},
@@ -41,6 +42,7 @@ const CURSOS_LIST = [
       "sigla": 'IWI133',
       "asignatura": 'Base de datos',
       "departamento": 'Informática' ,
+      "semestre": '1er Semestre' ,
       "paralelos": [
         { "id": 1, "profesor": 'profe3', "cupos": 20, "semestre": 1},
         { "id": 2, "profesor": 'profe2', "cupos": 20, "semestre": 1},
@@ -52,6 +54,7 @@ const CURSOS_LIST = [
       "sigla": 'FIS100',
       "asignatura": 'Introducción a la Física',
       "departamento": 'Física' ,
+      "semestre": '1er Semestre' ,
       "paralelos": [
         {"id": 1, "profesor": 'Hakobyan', "cupos": 50, "semestre": 1},
         {"id": 2, "profesor": 'profe3', "cupos": 20, "semestre": 2},
@@ -63,6 +66,7 @@ const CURSOS_LIST = [
       "sigla": 'MAT021',
       "asignatura": 'Matemáticas I',
       "departamento": 'Matemáticas',
+      "semestre": '1er Semestre' ,
       "paralelos": [
         {"id": 1, "profesor": 'Yansen', "cupos": 35, "semestre": 1},
         {"id": 2, "profesor": 'Tuma', "cupos": 5, "semestre": 1},
@@ -75,6 +79,7 @@ const CURSOS_LIST = [
       "sigla": 'MAT022',
       "asignatura": 'Matemáticas II',
       "departamento": 'Matemáticas',
+      "semestre": '2do Semestre' ,
       "paralelos": [
         {"id": 1, "profesor": 'Tuma', "cupos": 14, "semestre": 1},
         {"id": 2, "profesor": 'Tuma', "cupos": 7, "semestre": 2},
