@@ -25,8 +25,8 @@ export class HorarioClases extends connect(store)(LitElement) {
 
 
 /* Variable para guardar el semestre seleccionado*/
-  @property({type: String})
-  private _selectedSemestre: string = "";
+  /*@property({type: String})
+  private _selectedSemestre: string = "";*/
 
 
   static get styles() {
@@ -117,6 +117,7 @@ export class HorarioClases extends connect(store)(LitElement) {
         ${Array.from(dptos).map(d => html`
         <option value="${d}">${d}</option>
         `)}
+        
     </select>
     <select class="selector" style="background-color:#ffae19;">
     <option>1er Semestre</option>
