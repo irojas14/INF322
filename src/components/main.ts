@@ -102,7 +102,7 @@ export class MainPage extends connect(store)(LitElement) {
         
         #footer {
         grid-column: 1 / 3;
-        background-color: #faba25;
+        background-color: #ff9900;
         align-content: center;
         }
 
@@ -114,7 +114,7 @@ export class MainPage extends connect(store)(LitElement) {
         }
         
         .component-margin {
-          margin: 10% 10%
+          margin: 2% 2%
         }
         
       `
@@ -159,6 +159,7 @@ export class MainPage extends connect(store)(LitElement) {
         </span>
     </div>`}
     `;
+    
   }
 
   constructor() {

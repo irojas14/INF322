@@ -72,7 +72,13 @@ export class HorarioClases extends connect(store)(LitElement) {
             border-color: #fff transparent transparent transparent;
         }
         
-        
+        .w3-container{
+            width: 30%
+            font-family: Arial
+           border: 6px solid transparent;
+           border-color: #fff transparent transparent transparent;
+
+        }
 
         .left{
             text-align: left;
@@ -110,6 +116,8 @@ export class HorarioClases extends connect(store)(LitElement) {
     });
 
     return html`
+    
+    
     <h2>Listado de Cursos</h2>
       <!-- Selector de departamento para hacer el filtro -->
     <select id="dpto-select" class="selector" style="background-color:#ffae19;" @change="${this._onDepartamentoChange}">
@@ -132,7 +140,10 @@ export class HorarioClases extends connect(store)(LitElement) {
     <option>10mo Semestre</option>
     <option>11vo Semestre</option>
     <option>12vo Semestre</option>
-    </select> 
+    </select>
+    
+    <div class="w3-container">
+
     <table class="left">
       <tbody>
         <tr>
@@ -157,7 +168,7 @@ export class HorarioClases extends connect(store)(LitElement) {
           <th class="horario">
             <strong> Horario </strong>
           </th>
-        </tr>
+        </tr> 
        ${Object.keys(cursos).map((key) => {
         const item = cursos[key];
         return html`
@@ -226,8 +237,11 @@ export class HorarioClases extends connect(store)(LitElement) {
         `;
       })}
       </tbody>
-      </table> 
+      
+      </table>    
+
+      </div> 
     `;
-  
+    
   }
-}
+} 
