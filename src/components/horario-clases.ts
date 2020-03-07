@@ -19,15 +19,10 @@ export class HorarioClases extends connect(store)(LitElement) {
   @property({type: Object})
   public cursos: ListaCursos = {};
 
- /* Variable para guardar el depto seleccionado */
+  /* Variable para guardar el depto selecionado */
   @property({type: String})
   private _selectedDepto: string = "";
-
-
-/* Variable para guardar el semestre seleccionado*/
-  /*@property({type: String})
-  private _selectedSemestre: string = "";*/
-
+  private _selectedSemestre: string = "";
 
   static get styles() {
     return [
@@ -72,14 +67,6 @@ export class HorarioClases extends connect(store)(LitElement) {
             border-color: #fff transparent transparent transparent;
         }
         
-        .w3-container{
-            width: 30%
-            font-family: Arial
-           border: 6px solid transparent;
-           border-color: #fff transparent transparent transparent;
-
-        }
-
         .left{
             text-align: left;
         }
@@ -97,12 +84,22 @@ export class HorarioClases extends connect(store)(LitElement) {
       }
   }
 
+  private _onSemestreChange () {
+      let selector = this.shadowRoot!.getElementById('semestre-select') as HTMLInputElement;
+      console.log(selector);
+      if (selector) {
+          this._selectedSemestre = selector.value;
+      }
+  }
+
+
+
   protected render() {
-      /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
-    let cursos : ListaCursos = {} as ListaCursos;
-    if (this._selectedDepto) { // || mas filtros
+    /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
+    let cursos : ListaCursos = {} as Lista Cursos;
+    if (this._selectedSemestre) { // || mas filtros
         Object.keys(this.cursos).forEach((key:string) => {
-            if (this.cursos[key].departamento === this._selectedDepto) { // Y más condiciones.
+            if (this.cursos[key].semestre === this._selectedSemestre) { // Y más condiciones.
                 cursos[key] = this.cursos[key]
             }
         });
@@ -110,39 +107,38 @@ export class HorarioClases extends connect(store)(LitElement) {
         cursos = this.cursos;
     }
 
+
     let dptos = new Set(); // Un Set para guardar los departamentos.
     Object.values(this.cursos).forEach((curso:any) => {
         dptos.add(curso.departamento);
     });
 
+     let sem = new Set(); // Un Set para guardar los departamentos.
+    Object.values(this.cursos).forEach((curso:any) => {
+        sem.add(curso.semestre);
+    });
+
+
+
     return html`
-    
-    
     <h2>Listado de Cursos</h2>
-      <!-- Selector de departamento para hacer el filtro -->
+
+    <!-- Selector de departamento para hacer el filtro -->
     <select id="dpto-select" class="selector" style="background-color:#ffae19;" @change="${this._onDepartamentoChange}">
         <option selected value="">Todos los departamentos</option>
         ${Array.from(dptos).map(d => html`
         <option value="${d}">${d}</option>
         `)}
-        
     </select>
-    <select class="selector" style="background-color:#ffae19;">
-    <option>1er Semestre</option>
-    <option>2do Semestre</option>
-    <option>3er Semestre</option>
-    <option>4to Semestre</option>
-    <option>5to Semestre</option>
-    <option>6to Semestre</option>
-    <option>7mo Semestre</option>
-    <option>8vo Semestre</option>
-    <option>9no Semestre</option>
-    <option>10mo Semestre</option>
-    <option>11vo Semestre</option>
-    <option>12vo Semestre</option>
-    </select>
-    
-    <div class="w3-container">
+
+    <select id="semestre-select" class="selector" style="background-color:#ffae19;" @change="${this._onSemestreChange}">
+    <option selected value="">Todos los semestres</option>
+        ${Array.from(sem).map(d => html`
+        <option value="${d}">${d}</option>
+        `)}
+    </select> 
+
+
 
     <table class="left">
       <tbody>
@@ -168,8 +164,8 @@ export class HorarioClases extends connect(store)(LitElement) {
           <th class="horario">
             <strong> Horario </strong>
           </th>
-        </tr> 
-       ${Object.keys(cursos).map((key) => {
+        </tr>
+      ${Object.keys(cursos).map((key) => {
         const item = cursos[key];
         return html`
         ${Object.keys(item.paralelos).map((idies) => {
@@ -187,6 +183,7 @@ export class HorarioClases extends connect(store)(LitElement) {
           <td>
             ${item.departamento}
           </td>
+
           <td>
             ${item2.id}
           </td> 
@@ -237,11 +234,8 @@ export class HorarioClases extends connect(store)(LitElement) {
         `;
       })}
       </tbody>
-      
-      </table>    
-
-      </div> 
+      </table> 
     `;
-    
+  
   }
-} 
+}
