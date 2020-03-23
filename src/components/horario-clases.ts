@@ -96,10 +96,10 @@ export class HorarioClases extends connect(store)(LitElement) {
 
   protected render() {
     /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
-    let cursos : ListaCursos = {} as Lista Cursos;
-    if (this._selectedSemestre) { // || mas filtros
+    let cursos : ListaCursos = {} as ListaCursos;
+    if (this._selectedDepto) { // || mas filtros
         Object.keys(this.cursos).forEach((key:string) => {
-            if (this.cursos[key].semestre === this._selectedSemestre) { // Y más condiciones.
+            if (this.cursos[key].departamento === this._selectedDepto) { // Y más condiciones.
                 cursos[key] = this.cursos[key]
             }
         });
@@ -113,12 +113,6 @@ export class HorarioClases extends connect(store)(LitElement) {
         dptos.add(curso.departamento);
     });
 
-     let sem = new Set(); // Un Set para guardar los departamentos.
-    Object.values(this.cursos).forEach((curso:any) => {
-        sem.add(curso.semestre);
-    });
-
-
 
     return html`
     <h2>Listado de Cursos</h2>
@@ -130,14 +124,6 @@ export class HorarioClases extends connect(store)(LitElement) {
         <option value="${d}">${d}</option>
         `)}
     </select>
-
-    <select id="semestre-select" class="selector" style="background-color:#ffae19;" @change="${this._onSemestreChange}">
-    <option selected value="">Todos los semestres</option>
-        ${Array.from(sem).map(d => html`
-        <option value="${d}">${d}</option>
-        `)}
-    </select> 
-
 
 
     <table class="left">
