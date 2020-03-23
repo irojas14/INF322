@@ -76,6 +76,13 @@ export class HorarioClases extends connect(store)(LitElement) {
             font-family: Arial
             border: 6px solid transparent;
             border-color: #fff transparent transparent transparent;
+            
+        }
+
+        h2 {
+          position: absolute;
+          left: 100px;
+          top: 150px;
         }
         
        .scrollit{
@@ -84,7 +91,8 @@ export class HorarioClases extends connect(store)(LitElement) {
         	width:900px;
         	background:ff8000;
         	scrollbar-color: #cc6600 orange; /* thumb and track color */
-        	scrollbar-width: thin;
+          scrollbar-width: thin;
+          position:absolute;
        }
        
         .left{
