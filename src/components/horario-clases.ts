@@ -76,9 +76,9 @@ export class HorarioClases extends connect(store)(LitElement) {
        .scrollit{
         overflow:scroll;
         height:400px;
-        width:950px;
+        width:900px;
         background:ff8000;
-        scrollbar-color: #ff8000 orange; /* thumb and track color */
+        scrollbar-color: #cc6600 orange; /* thumb and track color */
         scrollbar-width: thin;
        }
        
@@ -146,10 +146,9 @@ export class HorarioClases extends connect(store)(LitElement) {
     
     
     <div class="scrollit">
-    <table class="left">
-
+    <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd;">
       <tbody>
-        <tr>
+        <tr="nth-child(even)" background-color: "#f2f2f2">
           <th class="sigla">
             <strong> Sigla </strong>
           </th>
