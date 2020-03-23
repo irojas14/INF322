@@ -117,6 +117,8 @@ export class HorarioClases extends connect(store)(LitElement) {
         dptos.add(curso.departamento);
     });
 
+
+
     return html`
     
    
@@ -144,11 +146,11 @@ export class HorarioClases extends connect(store)(LitElement) {
     <option>12vo Semestre</option>
     </select>
     
-    
+
     <div class="scrollit">
-    <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd;">
+    <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd; text-align:center">
       <tbody>
-        <tr="nth-child(even)" background-color: "#f2f2f2">
+        <tr  style="background-color: yellow">
           <th class="sigla">
             <strong> Sigla </strong>
           </th>
