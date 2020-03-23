@@ -23,6 +23,11 @@ export class HorarioClases extends connect(store)(LitElement) {
   @property({type: String})
   private _selectedDepto: string = "";
 
+  @property({type: String})
+  private _selectedSemestre: string = "";
+
+  @property({type: String})
+  private _filtroTexto: string = "";
 
 /* Variable para guardar el semestre seleccionado*/
   /*@property({type: String})
@@ -75,7 +80,7 @@ export class HorarioClases extends connect(store)(LitElement) {
         
        .scrollit{
         overflow:scroll;
-        height:400px;
+        height:500px;
         width:900px;
         background:ff8000;
         scrollbar-color: #cc6600 orange; /* thumb and track color */
@@ -99,14 +104,48 @@ export class HorarioClases extends connect(store)(LitElement) {
       }
   }
 
+  private _onSemestreChange () {
+      let selector = this.shadowRoot!.getElementById('semestre-select') as HTMLInputElement;
+      console.log(selector);
+      if (selector) {
+          this._selectedSemestre = selector.value;
+      }
+  }
+
+
+  _buscarTexto (text) {
+    alert('Pronto nueva función');
+  }
+
+
+
+
+
   protected render() {
-      /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
+    /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
     let cursos : ListaCursos = {} as ListaCursos;
-    if (this._selectedDepto) { // || mas filtros
+    
+    /*let filtrados = cursos['asignatura'].filter(asignatura => curso.asignatura.includes(text));*/
+
+
+    if ((this._selectedSemestre)||(this._selectedDepto)){ // || mas filtros
         Object.keys(this.cursos).forEach((key:string) => {
-            if (this.cursos[key].departamento === this._selectedDepto) { // Y más condiciones.
-                cursos[key] = this.cursos[key]
+            if ((this._selectedSemestre!="") && (this._selectedDepto=="")){
+               if ((this.cursos[key].semestre === this._selectedSemestre)){
+                 cursos[key] = this.cursos[key]
+               }
+
             }
+             if ((this._selectedSemestre=="") && (this._selectedDepto!="")){
+               if ((this.cursos[key].departamento === this._selectedDepto)){
+                 cursos[key] = this.cursos[key]
+               }
+
+            }
+            if ((this._selectedSemestre!="") && (this._selectedDepto!="")){
+               if ((this.cursos[key].departamento === this._selectedDepto) && (this.cursos[key].semestre === this._selectedSemestre)){
+                 cursos[key] = this.cursos[key]
+               }
         });
     } else {
         cursos = this.cursos;
@@ -117,12 +156,35 @@ export class HorarioClases extends connect(store)(LitElement) {
         dptos.add(curso.departamento);
     });
 
+      let sem = new Array(); // Un array para guardar los semestres y posteriormente poder ordenarlos. 
+    Object.values(this.cursos).forEach((curso:any) => {
+      if !sem.includes(curso.semestre){
+        sem.push(curso.semestre);
+      } 
+    }
+    )
+    sem.sort();
+
+     let asignaturas = new Array(); // Un array para guardar los semestres y posteriormente poder ordenarlos. 
+    Object.values(this.cursos).forEach((curso:any) => {
+      if !asignaturas.includes(curso.asignatura){
+        asignaturas.push(curso.asignatura);
+      } 
+    }
+    )
+    asignaturas.sort();
+
 
 
     return html`
     
    
     <h2>Listado de Cursos</h2>
+
+    <form>
+      <input class="search-input" placeholder="Nombre de la asignatura" size="35" type="text">
+       <input type="button" value="Buscar" class="btn" @click="${this._buscarTexto}"></form>
+
       <!-- Selector de departamento para hacer el filtro -->
     <select id="dpto-select" class="selector" style="background-color:#ffae19;" @change="${this._onDepartamentoChange}">
         <option selected value="">Todos los departamentos</option>
@@ -131,19 +193,13 @@ export class HorarioClases extends connect(store)(LitElement) {
         `)}
         
     </select>
-    <select class="selector" style="background-color:#ffae19;">
-    <option>1er Semestre</option>
-    <option>2do Semestre</option>
-    <option>3er Semestre</option>
-    <option>4to Semestre</option>
-    <option>5to Semestre</option>
-    <option>6to Semestre</option>
-    <option>7mo Semestre</option>
-    <option>8vo Semestre</option>
-    <option>9no Semestre</option>
-    <option>10mo Semestre</option>
-    <option>11vo Semestre</option>
-    <option>12vo Semestre</option>
+   
+      <!-- Selector de semestre para hacer el filtro -->
+    <select id="semestre-select" class="selector" style="background-color:#106cdb; color:#ffffff" @change="${this._onSemestreChange}">
+        <option selected value="">Todos los semestres</option>
+        ${Array.from(sem).map(d => html`
+        <option value="${d}">${d}</option>
+        `)}
     </select>
     
 

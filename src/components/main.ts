@@ -89,21 +89,29 @@ export class MainPage extends connect(store)(LitElement) {
         }
 
         #logInButton {
+          color:#ffffff;
           cursor: pointer;
           border: 1px solid gray;
           border-radius: 4px;
           padding: 5px;
-          background: aliceblue;
+          background: #ff7800;
+          bottom:200px;
+          left:515px;
+          position:absolute;
         }
 
         #logInButton:hover {
-          background: aqua;
+          color:#000000;
+          background: #fff000;
         }
         
         #footer {
         grid-column: 1 / 3;
-        background-color: #ff9900;
+        background-color: #faba25;
         align-content: center;
+        bottom: 0;
+        position:absolute;
+        width: 100%;
         }
 
         .centered {
@@ -112,9 +120,20 @@ export class MainPage extends connect(store)(LitElement) {
           justify-content: center;
           height: 100%;
         }
+
+        .mi-imagen {
+          position: relative;
+        }
+
+        .btn {
+        width:220px;
+        position: absolute;
+        right:100px;
+        bottom:0px;
+        }
         
         .component-margin {
-          margin: 2% 2%
+          margin: 10% 10%
         }
         
       `
@@ -124,8 +143,14 @@ export class MainPage extends connect(store)(LitElement) {
   _logIn () {
     this._loggedIn = (Math.random() > .5);
     if (!this._loggedIn) {
-        alert('try again!');
+        alert('Inténtalo otra vez!');
     }
+  }
+
+  _logOut (){
+     alert("Cerrando Sesión");
+     this._loggedIn = false;
+    
   }
 
   /* Render se ejecuta cada vez que se modifica una variable marcada como property, OJO: no se verifican las
@@ -149,17 +174,22 @@ export class MainPage extends connect(store)(LitElement) {
         </div>
         
         <div id="footer">
+                   <input type="button" value="Cerrar" class="btn" @click="${this._logOut}"></input>
+        <div id="footer" style="text-align: right">
+         <img src="/logo_usm_color.png" alt="Logo USM" height="50" width="125"></img>
         </div>
-        
     </div>
     ` : html`
-    <div class="centered">
+    <div class="centered" style="background-color:#0d1e52">
+        <div>
         <span id="logInButton" @click="${this._logIn}">
-            Click here to try to log in!
-        </span>
-    </div>`}
+            Ingresa al sistema haciendo click aquí
+        </span></div>
+            <div>
+    <img src="/logo_usm.png" alt="Logo USM" height="150" width="150" class="mi-imagen"></img> </div>
+    </div>`
+    }
     `;
-    
   }
 
   constructor() {
