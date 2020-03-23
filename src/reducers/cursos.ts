@@ -38,6 +38,7 @@ export interface Curso {
   asignatura: string;
   departamento: string;
   paralelos: Array<Paralelo>;
+  semestre: string;
 }
 
 const INITIAL_STATE: CursosState = {

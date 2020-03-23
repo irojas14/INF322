@@ -19,29 +19,28 @@ export class HorarioClases extends connect(store)(LitElement) {
   @property({type: Object})
   public cursos: ListaCursos = {};
 
- /* Variable para guardar el depto seleccionado */
+
+  /* Variable para guardar el depto selecionado */
   @property({type: String})
   private _selectedDepto: string = "";
 
   @property({type: String})
   private _selectedSemestre: string = "";
 
-  @property({type: String})
-  private _filtroTexto: string = "";
-
-/* Variable para guardar el semestre seleccionado*/
-  /*@property({type: String})
-  private _selectedSemestre: string = "";*/
-
 
   static get styles() {
     return [
       ButtonSharedStyles,
       css`
-
-        :host {
+         :host {
             display: block;
+            border-color:#1f3652;
+            overflow:scroll;
+            height:350px;
+            width:900px;
+
         }
+
 
         .sigla {
             width: 10% 
@@ -78,15 +77,6 @@ export class HorarioClases extends connect(store)(LitElement) {
             border-color: #fff transparent transparent transparent;
         }
         
-       .scrollit{
-        	overflow:scroll;
-        	height:300px;
-        	width:900px;
-        	background:ff8000;
-        	scrollbar-color: #cc6600 orange; /* thumb and track color */
-        	scrollbar-width: thin;
-       }
-       
         .left{
             text-align: left;
         }
@@ -94,6 +84,7 @@ export class HorarioClases extends connect(store)(LitElement) {
     ];
   }
   
+
 
   /*Esto ocurre cuando el selector cambia, entonces se cambia this._selectedDepto que efectua el filtro. */
   private _onDepartamentoChange () {
@@ -112,23 +103,23 @@ export class HorarioClases extends connect(store)(LitElement) {
       }
   }
 
+  /*private _capturarTexto () {
+      let x = this.shadowRoot!.getElementById('filtro-texto') as HTMLInputElement;
+      console.log(x);
+      if (x) {
+          this._filtroTexto = x.value;
+      }
+  }*/
 
-  _buscarTexto (text) {
+  _buscarTexto () {
     alert('Pronto nueva función');
   }
-
-
-
 
 
   protected render() {
     /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
     let cursos : ListaCursos = {} as ListaCursos;
-    
-    /*let filtrados = cursos['asignatura'].filter(asignatura => curso.asignatura.includes(text));*/
-
-
-    if ((this._selectedSemestre)||(this._selectedDepto)){ // || mas filtros
+    if ((this._selectedSemestre)||(this._selectedDepto)) { // || mas filtros
         Object.keys(this.cursos).forEach((key:string) => {
             if ((this._selectedSemestre!="") && (this._selectedDepto=="")){
                if ((this.cursos[key].semestre === this._selectedSemestre)){
@@ -146,10 +137,12 @@ export class HorarioClases extends connect(store)(LitElement) {
                if ((this.cursos[key].departamento === this._selectedDepto) && (this.cursos[key].semestre === this._selectedSemestre)){
                  cursos[key] = this.cursos[key]
                }
+        }
         });
     } else {
         cursos = this.cursos;
     }
+
 
     let dptos = new Set(); // Un Set para guardar los departamentos.
     Object.values(this.cursos).forEach((curso:any) => {
@@ -158,53 +151,38 @@ export class HorarioClases extends connect(store)(LitElement) {
 
       let sem = new Array(); // Un array para guardar los semestres y posteriormente poder ordenarlos. 
     Object.values(this.cursos).forEach((curso:any) => {
-      if !sem.includes(curso.semestre){
+      if (!sem.includes(curso.semestre)){
         sem.push(curso.semestre);
-      } 
-    }
-    )
-    sem.sort();
+      }    sem.sort(); 
+    });
 
-     let asignaturas = new Array(); // Un array para guardar los semestres y posteriormente poder ordenarlos. 
-    Object.values(this.cursos).forEach((curso:any) => {
-      if !asignaturas.includes(curso.asignatura){
-        asignaturas.push(curso.asignatura);
-      } 
-    }
-    )
-    asignaturas.sort();
 
 
 
     return html`
-    
-   
     <h2>Listado de Cursos</h2>
+<form>
+<input class="search-input" placeholder="Nombre de la asignatura" size="35" type="text">
+<input type="button" value="Buscar" class="btn" @click="${this._buscarTexto}"></form>
 
-    <form>
-      <input class="search-input" placeholder="Nombre de la asignatura" size="35" type="text">
-       <input type="button" value="Buscar" class="btn" @click="${this._buscarTexto}"></form>
 
-      <!-- Selector de departamento para hacer el filtro -->
+    <!-- Selector de departamento para hacer el filtro -->
     <select id="dpto-select" class="selector" style="background-color:#ffae19;" @change="${this._onDepartamentoChange}">
         <option selected value="">Todos los departamentos</option>
         ${Array.from(dptos).map(d => html`
         <option value="${d}">${d}</option>
         `)}
-        
     </select>
-   
-      <!-- Selector de semestre para hacer el filtro -->
+<!-- Selector de semestre para hacer el filtro -->
     <select id="semestre-select" class="selector" style="background-color:#106cdb; color:#ffffff" @change="${this._onSemestreChange}">
         <option selected value="">Todos los semestres</option>
         ${Array.from(sem).map(d => html`
         <option value="${d}">${d}</option>
         `)}
     </select>
-    
 
-    <div class="scrollit">
-    <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd; text-align:center">
+      <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd; text-align:center">
+
       <tbody>
         <tr  style="background-color: yellow">
           <th class="sigla">
@@ -228,8 +206,8 @@ export class HorarioClases extends connect(store)(LitElement) {
           <th class="horario">
             <strong> Horario </strong>
           </th>
-        </tr> 
-       ${Object.keys(cursos).map((key) => {
+        </tr>
+      ${Object.keys(cursos).map((key) => {
         const item = cursos[key];
         return html`
         ${Object.keys(item.paralelos).map((idies) => {
@@ -247,6 +225,7 @@ export class HorarioClases extends connect(store)(LitElement) {
           <td>
             ${item.departamento}
           </td>
+
           <td>
             ${item2.id}
           </td> 
@@ -297,11 +276,8 @@ export class HorarioClases extends connect(store)(LitElement) {
         `;
       })}
       </tbody>
-      
-      </table>    
-
-      </div>
+      </table> 
     `;
-    
+  
   }
-} 
+}
