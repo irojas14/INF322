@@ -85,8 +85,7 @@ const CURSOS_LIST = [
         {"id": 2, "profesor": 'Tuma', "cupos": 7, "semestre": 2},
         {"id": 3, "profesor": 'Tuma', "cupos": 4, "semestre": 3}
       ]
-  },  
-  {
+  },  {
       "id": 6,
       "sigla": 'FIS110',
       "asignatura": 'Física I',
@@ -97,7 +96,46 @@ const CURSOS_LIST = [
         {"id": 2, "profesor": 'Espoz', "cupos": 7, "semestre": 2},
         {"id": 3, "profesor": 'Cvetic', "cupos": 4, "semestre": 3}
       ]
-  }, 
+  }, {
+      "id": 7,
+      "sigla": 'IWI101',
+      "asignatura": 'Introducción a la Ingeniería',
+      "departamento": 'Informática',
+      "semestre": '2do Semestre' ,
+      "paralelos": [
+        {"id": 1, "profesor": 'Torres', "cupos": 50, "semestre": 1},
+        {"id": 2, "profesor": 'Moltedo', "cupos": 30, "semestre": 2}
+      ]
+  }, {
+      "id": 8,
+      "sigla": 'INF134',
+      "asignatura": 'Estructura de Datos',
+      "departamento": 'Informática',
+      "semestre": '3er Semestre' ,
+      "paralelos": [
+        {"id": 1, "profesor": 'Hubert Hoffman', "cupos": 40, "semestre": 1},
+      ]
+  }, {
+      "id": 9,
+      "sigla": 'INF152',
+      "asignatura": 'Estructuras Discretas',
+      "departamento": 'Informática',
+      "semestre": '3er Semestre' ,
+      "paralelos": [
+        {"id": 1, "profesor": 'Horst Von Brand', "cupos": 40, "semestre": 1},
+      ]
+  }, {
+      "id": 10,
+      "sigla": 'MAT023',
+      "asignatura": 'Matemáticas III',
+      "departamento": 'Matemáticas',
+      "semestre": '3er Semestre' ,
+      "paralelos": [
+       {"id": 1, "profesor": 'Tuma', "cupos": 14, "semestre": 1},
+       {"id": 2, "profesor": 'Tuma', "cupos": 7, "semestre": 2},
+       {"id": 3, "profesor": 'Tuma', "cupos": 4, "semestre": 3}
+      ]
+  },
 
 ];
 

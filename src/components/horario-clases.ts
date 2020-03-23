@@ -33,8 +33,12 @@ export class HorarioClases extends connect(store)(LitElement) {
     return [
       ButtonSharedStyles,
       css`
+
         :host {
             display: block;
+            overflow:scroll;
+            height:400px;
+            width:950px
         }
 
         .sigla {
