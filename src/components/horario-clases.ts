@@ -79,12 +79,12 @@ export class HorarioClases extends connect(store)(LitElement) {
         }
         
        .scrollit{
-        overflow:scroll;
-        height:500px;
-        width:900px;
-        background:ff8000;
-        scrollbar-color: #cc6600 orange; /* thumb and track color */
-        scrollbar-width: thin;
+        	overflow:scroll;
+        	height:300px;
+        	width:900px;
+        	background:ff8000;
+        	scrollbar-color: #cc6600 orange; /* thumb and track color */
+        	scrollbar-width: thin;
        }
        
         .left{

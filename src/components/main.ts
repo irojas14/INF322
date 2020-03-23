@@ -109,9 +109,6 @@ export class MainPage extends connect(store)(LitElement) {
         grid-column: 1 / 3;
         background-color: #faba25;
         align-content: center;
-        bottom: 0;
-        position:absolute;
-        width: 100%;
         }
 
         .centered {
