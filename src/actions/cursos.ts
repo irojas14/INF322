@@ -135,6 +135,26 @@ const CURSOS_LIST = [
        {"id": 2, "profesor": 'Tuma', "cupos": 7, "semestre": 2},
        {"id": 3, "profesor": 'Tuma', "cupos": 4, "semestre": 3}
       ]
+  }, {
+      "id": 11,
+      "sigla": 'INF322',
+      "asignatura": 'Diseño de Interaces Usuarias',
+      "departamento": 'Informática',
+      "semestre": "8vo Semestre",
+      "paralelos": [
+        {"id": 1, "profesor": 'H. Vargas', "cupos": 50, "semestre": 1}
+      ]
+  }, {
+      "id": 12,
+      "sigla": 'INF322',
+      "asignatura": 'Economía IA',
+      "departamento": 'Industrias',
+      "semestre": "4to Semestre",
+      "paralelos": [
+        {"id": 1, "profesor": 'A.Sanchez', "cupos": 40, "semestre": 1},
+        {"id": 2, "profesor": 'R. Sanchez', "cupos": 25, "semestre": 2},
+        {"id": 3, "profesor": 'A. Vidal', "cupos": 35, "semestre": 3}
+      ]
   },
 
 ];

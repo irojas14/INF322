@@ -20,13 +20,15 @@ export class HorarioClases extends connect(store)(LitElement) {
   public cursos: ListaCursos = {};
 
 
-  /* Variable para guardar el depto selecionado */
+ /* Variable para guardar el depto selecionado */
   @property({type: String})
   private _selectedDepto: string = "";
 
   @property({type: String})
   private _selectedSemestre: string = "";
 
+  @property({type: String})
+  private _nombreRamo: string = "";
 
   static get styles() {
     return [
@@ -34,11 +36,19 @@ export class HorarioClases extends connect(store)(LitElement) {
       css`
          :host {
             display: block;
-            border-color:#1f3652;
+            border-color:#7dd741;
             overflow:scroll;
-            height:350px;
+            height:400px;
             width:900px;
 
+        }
+         .boton1 {
+          color:#ffffff;
+          cursor: pointer;
+          border: 1px solid gray;
+          border-radius: 4px;
+          padding: 5px;
+          background: #7dd741;
         }
 
 
@@ -75,28 +85,15 @@ export class HorarioClases extends connect(store)(LitElement) {
             font-family: Arial
             border: 6px solid transparent;
             border-color: #fff transparent transparent transparent;
-            
         }
-
-        h2 {
-          position: absolute;
-          left: 100px;
-          top: 150px;
-        }
-        
-<<<<<<< HEAD
-       .scrollit{
-        	overflow:scroll;
-        	height:300px;
-        	width:900px;
-        	background:ff8000;
-        	scrollbar-color: #cc6600 orange; /* thumb and track color */
+        .scrollit{
+          overflow:scroll;
+          height:300px;
+          width:900px;
+          scrollbar-color: #cc6600 orange; /* thumb and track color */
           scrollbar-width: thin;
-          position:absolute;
        }
-       
-=======
->>>>>>> 000f28a2007caa977978c284557526f5035ab94a
+        
         .left{
             text-align: left;
         }
@@ -132,13 +129,35 @@ export class HorarioClases extends connect(store)(LitElement) {
   }*/
 
   _buscarTexto () {
-    alert('Pronto nueva función');
+     let texto = this.shadowRoot!.getElementById('nombrecompleto') as HTMLInputElement;
+     if (texto.value != ""){
+      this._nombreRamo = texto.value;
+     }
+     else{
+      alert("Ingrese una palabra para realizar la búsqueda")
+     }
+  }
+
+    _limpiarTexto () {
+      this._nombreRamo = "";
   }
 
 
   protected render() {
     /* Vamos a trabajar con 'cursos', una copia filtrada de 'this.cursos'. */
     let cursos : ListaCursos = {} as ListaCursos;
+    if (this._nombreRamo.length > 0) {
+        console.log(this._nombreRamo)
+         // || mas filtros
+        Object.keys(this.cursos).forEach((key:string) => {
+          console.log(this.cursos[key].asignatura)
+          if (this.cursos[key].asignatura.toLowerCase().includes(this._nombreRamo.toLowerCase())){
+            console.log('lo encontre')
+                 cursos[key] = this.cursos[key]
+               }
+      });
+    }else{
+
     if ((this._selectedSemestre)||(this._selectedDepto)) { // || mas filtros
         Object.keys(this.cursos).forEach((key:string) => {
             if ((this._selectedSemestre!="") && (this._selectedDepto=="")){
@@ -162,6 +181,9 @@ export class HorarioClases extends connect(store)(LitElement) {
     } else {
         cursos = this.cursos;
     }
+    }
+
+
 
 
     let dptos = new Set(); // Un Set para guardar los departamentos.
@@ -181,13 +203,26 @@ export class HorarioClases extends connect(store)(LitElement) {
 
     return html`
     <h2>Listado de Cursos</h2>
-<form>
-<input class="search-input" placeholder="Nombre de la asignatura" size="35" type="text">
-<input type="button" value="Buscar" class="btn" @click="${this._buscarTexto}"></form>
+ <form>
+
+  <p>
+
+    <input id="nombrecompleto" width="75px" height="48px" type="text" placeholder="Busca por nombre de la asignatura">
+
+    <span class="boton1" id="buscar_texto" @click="${this._buscarTexto}">
+            Buscar
+        </span>
+
+  
+ <span class="boton1" id="limpiar_texto" @click="${this._limpiarTexto}">
+            Limpiar Búsqueda
+        </span>
+        </p>
+</form>
 
 
     <!-- Selector de departamento para hacer el filtro -->
-    <select id="dpto-select" class="selector" style="background-color:#ffae19;" @change="${this._onDepartamentoChange}">
+    <select id="dpto-select" class="selector" style="background-color:#106cdb; color:#ffffff" @change="${this._onDepartamentoChange}">
         <option selected value="">Todos los departamentos</option>
         ${Array.from(dptos).map(d => html`
         <option value="${d}">${d}</option>
@@ -201,8 +236,8 @@ export class HorarioClases extends connect(store)(LitElement) {
         `)}
     </select>
 
-      <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd; text-align:center">
-
+    <div class="scrollit">
+    <table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;border-color:#ddd; text-align:center">
       <tbody>
         <tr  style="background-color: yellow">
           <th class="sigla">
@@ -226,7 +261,7 @@ export class HorarioClases extends connect(store)(LitElement) {
           <th class="horario">
             <strong> Horario </strong>
           </th>
-        </tr>
+        </tr> 
       ${Object.keys(cursos).map((key) => {
         const item = cursos[key];
         return html`
@@ -256,7 +291,7 @@ export class HorarioClases extends connect(store)(LitElement) {
             ${item2.cupos}
           </td> 
           <td>
-          <button @click="${() => {console.log(item2)}}">
+          <button @click="${() => {alert("Pronto contaremos con esta función")}}">
           Detalles
           </button>
           </td> 
@@ -284,7 +319,7 @@ export class HorarioClases extends connect(store)(LitElement) {
             ${item2.cupos}
           </td> 
           <td>
-          <button @click="${() => {console.log(item2)}}">
+          <button @click="${() => {alert("Pronto contaremos con esta función")}}">
           Detalles
           </button>
           </td> 
