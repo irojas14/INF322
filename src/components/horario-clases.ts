@@ -36,9 +36,6 @@ export class HorarioClases extends connect(store)(LitElement) {
 
         :host {
             display: block;
-            overflow:scroll;
-            height:400px;
-            width:950px
         }
 
         .sigla {
@@ -76,11 +73,15 @@ export class HorarioClases extends connect(store)(LitElement) {
             border-color: #fff transparent transparent transparent;
         }
         
-        .scrollit {
-            overflow:scroll;
-            height:450px;
-        }
-
+       .scrollit{
+        overflow:scroll;
+        height:400px;
+        width:950px;
+        background:ff8000;
+        scrollbar-color: #ff8000 orange; /* thumb and track color */
+        scrollbar-width: thin;
+       }
+       
         .left{
             text-align: left;
         }
