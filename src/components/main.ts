@@ -122,6 +122,10 @@ export class MainPage extends connect(store)(LitElement) {
           position: relative;
         }
 
+        .content{
+          top:0;
+        }
+
         .btn {
         width:220px;
         position: absolute;
@@ -171,7 +175,7 @@ export class MainPage extends connect(store)(LitElement) {
         </div>
         
         <div id="footer">
-                   <input type="button" value="Cerrar" class="btn" @click="${this._logOut}"></input>
+                   <input type="button" value="Cerrar Sesión" class="btn" @click="${this._logOut}"></input>
         <div id="footer" style="text-align: right">
          <img src="/logo_usm_color.png" alt="Logo USM" height="50" width="125"></img>
         </div>

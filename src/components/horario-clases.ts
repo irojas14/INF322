@@ -35,10 +35,9 @@ export class HorarioClases extends connect(store)(LitElement) {
       ButtonSharedStyles,
       css`
          :host {
-            display: block;
+
             border-color:#7dd741;
-            overflow:scroll;
-            height:400px;
+            height:350px;
             width:900px;
 
         }
@@ -79,7 +78,7 @@ export class HorarioClases extends connect(store)(LitElement) {
         .horario{
             width: 10%
         }
-
+        
         .selector{
             width: 30%
             font-family: Arial
@@ -93,6 +92,9 @@ export class HorarioClases extends connect(store)(LitElement) {
           scrollbar-color: #cc6600 orange; /* thumb and track color */
           scrollbar-width: thin;
        }
+
+        
+        }
         
         .left{
             text-align: left;
@@ -202,6 +204,7 @@ export class HorarioClases extends connect(store)(LitElement) {
 
 
     return html`
+    
     <h2>Listado de Cursos</h2>
  <form>
 
@@ -332,6 +335,8 @@ export class HorarioClases extends connect(store)(LitElement) {
       })}
       </tbody>
       </table> 
+      </div>
+    
     `;
   
   }
